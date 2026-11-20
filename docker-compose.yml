@@ -12,6 +12,8 @@ services:
     volumes:
       - ./nats.conf:/etc/nats/nats.conf:ro
       - nats-data:/data
+    networks:
+      - dokploy-network
     healthcheck:
       test: ["CMD", "wget", "-q", "-O-", "http://localhost:8222/healthz"]
       interval: 30s
@@ -21,3 +23,7 @@ services:
 
 volumes:
   nats-data:
+
+networks:
+  dokploy-network:
+    external: true
