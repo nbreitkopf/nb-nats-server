@@ -1,8 +1,7 @@
 services:
   nats:
-    image: nats:2.15.3-alpine
-    restart: unless-stopped 
-    command: ["-c", "/etc/nats/nats.conf"]
+    build: .
+    restart: unless-stopped
     expose:
       - "4222"
       - "8222"
@@ -10,7 +9,6 @@ services:
     environment:
       NATS_MAIN_TOKEN: ${NATS_MAIN_TOKEN}
     volumes:
-      - ./nats.conf:/etc/nats/nats.conf:ro
       - nats-data:/data
     networks:
       - dokploy-network
